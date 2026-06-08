@@ -4,3 +4,6 @@ subject/
 
 # macOS / editor
 .DS_Store
+
+# Compiled object files / binaries
+*.o
