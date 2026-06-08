@@ -1,0 +1,6 @@
+# Personal learning notes and copyrighted subject PDFs — not for public repo
+docs/
+subject/
+
+# macOS / editor
+.DS_Store

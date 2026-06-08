@@ -1,0 +1,10 @@
+docs/*
+tasks/*
+sessions/*
+subject/*
+concepts/*
+!docs/.gitkeep
+!tasks/.gitkeep
+!sessions/.gitkeep
+!subject/.gitkeep
+!concepts/.gitkeep
