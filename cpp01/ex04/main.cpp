@@ -1,47 +1,60 @@
-#include <string>
 #include <fstream>
 #include <iostream>
+#include <string>
 
-
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	if (ac != 4)
-		return 1;
+		return (1);
+	std::string sub = av[2];
+	std::string rep = av[3];
+	std::size_t sub_len = sub.length();
+	std::size_t rep_len = rep.length();
+	if (sub.empty())
+	{
+		std::cout << "sed: first RE may not be empty" << std::endl;
+		return (1);
+	}
 	std::ifstream ifs(av[1]);
 	if (!ifs.is_open())
 	{
 		std::cout << "ファイルを開けませんでした" << std::endl;
-		return 1;
+		return (1);
 	}
 	std::string file_name = av[1];
 	std::ofstream ofs(file_name + ".replace");
-
+	if (!ofs.is_open())
+	{
+		std::cout << "ファイルを開けませんでした" << std::endl;
+		return (1);
+	}
 	std::string line;
-	std::string	sub = av[2];
-	std::string	rep = av[3];
-	std::size_t	sub_len = sub.length();
-	
 	while (std::getline(ifs, line))
 	{
-		std::size_t	pos = line.find(sub);
+		std::size_t pos = line.find(sub);
 		while (pos != std::string::npos)
 		{
 			line.erase(pos, sub_len);
 			line.insert(pos, rep);
-			pos = line.find(sub);
+			pos = line.find(sub, pos + rep_len);
 		}
 		ofs << line << std::endl;
 	}
+	return 0;
 }
 
-
+/*
+	av[1] == av[2]
+	av[2] = av[1] + *
+	av[1] = ""
+*/
 
 // using namespace std;
 // int main(void)
 // {
 // 	string s = "myname is myname and yourname is myname";
 // 	string sub = "myname";
-// 	string rep = "ioio";
+// 	string rep = "fdddddddddddddddd";
 
 // 	// cout << s.find("myname") << endl;
 // 	// int i = s.find("myname");
@@ -50,15 +63,15 @@ int main(int ac, char **av)
 // 	// int j = s.find("myname");
 // 	// s.erase(j ,sub.length());
 // 	// cout << s.insert(j, rep) << endl;
-	
+
 // 	std::size_t pos = s.find(sub);
 // 	std::size_t sub_len = sub.length();
+// 	std::size_t	rep_len = rep.length();
 // 	while (pos != std::string::npos)
 // 	{
 // 		s.erase(pos, sub_len);
 // 		s.insert(pos, rep);
-// 		pos = s.find(sub);
+// 		pos = s.find(sub, pos + rep_len);
 // 	}
 // 	cout << s << endl;
 // }
-
