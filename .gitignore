@@ -7,3 +7,37 @@ subject/
 
 # Compiled object files / binaries
 *.o
+a.out
+
+# Executables (Makefile NAME of each exercise)
+abstract
+animal
+array
+brain
+bsp
+bureaucrat
+claptrap
+convert
+diamondtrap
+easyfind
+fixed
+form
+forms
+fragtrap
+harl
+harlFilter
+identify
+intern
+iter
+materia
+megaphone
+mutantstack
+phonebook
+pra
+replace
+scavtrap
+serialize
+span
+violence
+whatever
+zombie

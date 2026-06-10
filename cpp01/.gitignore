@@ -8,3 +8,6 @@ concepts/*
 !sessions/.gitkeep
 !subject/.gitkeep
 !concepts/.gitkeep
+*file
+*.replace
+
