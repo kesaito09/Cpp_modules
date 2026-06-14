@@ -10,4 +10,5 @@ concepts/*
 !concepts/.gitkeep
 *file
 *.replace
-
+a.out
+concepts/*

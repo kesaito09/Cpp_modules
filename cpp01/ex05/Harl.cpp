@@ -36,18 +36,11 @@ void	Harl::complain(std::string level)
 		"WARNING",
 		"ERROR",
 	};
-	int index = -1;
 	for (int i = 0; i < 4; i++)
 	{
 		if (levels[i] == level)
-		{
-			index = i;
-			break;
-		}
+			(this->*harl_arr[i])();	
 	}
-	if (index == -1)
-		return ;
-	(this->*harl_arr[index])();
 }
 
 // void	Harl::complain(std::string level)
