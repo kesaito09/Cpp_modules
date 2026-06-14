@@ -39,37 +39,11 @@ void	Harl::complain(std::string level)
 	for (int i = 0; i < 4; i++)
 	{
 		if (levels[i] == level)
-			(this->*harl_arr[i])();	
+			return (this->*harl_arr[i])();
 	}
+	std::cout << "INVALID" << std::endl;
+	return ;
 }
-
-// void	Harl::complain(std::string level)
-// {
-// 	static const	Harl_func harl_arr[4] = {
-// 		&Harl::debug,
-// 		&Harl::info,
-// 		&Harl::warning,
-// 		&Harl::error,
-// 	};
-// 	static const	std::string	levels[4] = {
-// 		"DEBUG",
-// 		"INFO",
-// 		"WARNING",
-// 		"ERROR",
-// 	};
-// 	int index = -1;
-// 	for (int i = 0; i < 4; i++)
-// 	{
-// 		if (levels[i] == level)
-// 		{
-// 			index = i;
-// 			break;
-// 		}
-// 	}
-// 	if (index == -1)
-// 		return ;
-// 	((*this).*harl_arr[index])();
-// }
 
 
 // #include <iostream>

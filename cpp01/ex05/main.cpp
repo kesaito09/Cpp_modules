@@ -10,4 +10,5 @@ int main(void)
 	obj2.complain("WARNING");
 	obj2.complain("ERROR");
 	obj2.complain("INFO");
+	obj2.complain("ERRRRRROORRR");
 }
