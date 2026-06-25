@@ -3,7 +3,7 @@
 
 #include "PhoneBook.hpp"
 
-void logger(std::string msg);
+void Logger(const std::string& msg);
 
 int main(void) {
   std::string command;
@@ -11,13 +11,21 @@ int main(void) {
 
   while (1) {
     std::cout << "ADD or SEARCH or EXIT: ";
-    if (!(std::getline(std::cin, command))) return (logger("\nByebye ^^"), 0);
+    if (!(std::getline(std::cin, command))) {
+      Logger("\nByebye ^^");
+      return 0;
+    }
     if (command == "ADD")
-      phonebook.add();
+      phonebook.Add();
     else if (command == "SEARCH")
-      phonebook.search();
-    else if (command == "EXIT")
-      return (logger("\nBeybye ^^"), 0);
-    if (!std::cin) return (logger("\nByebye ^^"), 0);
+      phonebook.Search();
+    else if (command == "EXIT") {
+      Logger("\nByebye ^^");
+      return 0;
+    }
+    if (!std::cin) {
+      Logger("\nByebye ^^");
+      return 0;
+    }
   }
 }

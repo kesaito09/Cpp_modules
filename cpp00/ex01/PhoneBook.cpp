@@ -4,46 +4,43 @@
 #include <sstream>
 #include <string>
 
-bool input(Contact::s_contact* data);
-void logger(std::string msg);
+bool Input(Contact::ContactData* data);
+void Logger(const std::string& msg);
 
-PhoneBook::PhoneBook() { _count = 0; }
+PhoneBook::PhoneBook() : count_(0), head_(0) {}
 
-void PhoneBook::add(void) {
+void PhoneBook::Add(void) {
   Contact new_contact;
-  Contact::s_contact data;
-  int slot;
+  Contact::ContactData data;
 
-  slot = _count;
-  if (!input(&data)) return;
-  if (!new_contact.validate_format(data))
-    return logger("Contact not saved: all fields are required.");
-  new_contact.set(data);
-  _contacts[slot % 8] = new_contact;
-  _count++;
+  if (!Input(&data)) return;
+  if (!new_contact.ValidateFormat(data))
+    return Logger("Contact not saved: all fields are required.");
+  new_contact.Set(data);
+  contacts_[count_ % 8] = new_contact;
+  count_++;
+  if (count_ >= 8) head_ = count_ % 8;
 }
 
-void PhoneBook::display_list(void) const {
-  int display_count = 0;
+void PhoneBook::DisplayList(void) const {
+  std::size_t display_count = (count_ >= 8) ? 8 : count_;
 
-  Contact::display_header();
-  if (_count >= 8)
-    display_count = 8;
-  else
-    display_count = _count;
-  for (int i = 0; i < display_count; ++i) _contacts[i].display_row(i);
+  Contact::DisplayHeader();
+  for (std::size_t d = 0; d < display_count; ++d) {
+    contacts_[(head_ + d) % 8].DisplayRow(d);
+  }
 }
 
-void PhoneBook::search(void) const {
+void PhoneBook::Search(void) const {
   unsigned int index;
   std::string line;
   char check;
 
-  display_list();
+  DisplayList();
   std::cout << "Enter index: ";
   if (!(std::getline(std::cin, line))) return;
   std::stringstream ss(line);
-  if (!(ss >> index) || ss >> check) return logger("Invalid index");
-  if (index >= 8 || index >= _count) return logger("Invalid index");
-	_contacts[index].display_details();
+  if (!(ss >> index) || ss >> check) return Logger("Invalid index");
+  if (index >= 8 || index >= count_) return Logger("Invalid index");
+  contacts_[(head_ + index) % 8].DisplayDetails();
 }

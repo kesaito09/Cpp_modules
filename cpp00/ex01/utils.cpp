@@ -3,7 +3,7 @@
 
 #include "Contact.hpp"
 
-bool input(Contact::s_contact* data) {
+bool Input(Contact::ContactData* data) {
   std::cout << "First name: ";
   if (!(std::getline(std::cin, data->first_name))) return false;
   std::cout << "Last name: ";
@@ -17,4 +17,4 @@ bool input(Contact::s_contact* data) {
   return true;
 }
 
-void logger(std::string msg) { std::cout << msg << std::endl; }
+void Logger(const std::string& msg) { std::cout << msg << std::endl; }
