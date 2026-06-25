@@ -1,6 +1,6 @@
 NAME		= megaphone
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -pedantic -std=c++98 
 
 SRCS		= megaphone.cpp
 OBJS		= $(SRCS:.cpp=.o)
@@ -13,9 +13,11 @@ $(NAME): $(OBJS)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean: $(OBJS)
+clean:
 	rm -f $(OBJS)
 
-fclean: $(OBJS) $(NAME)
+fclean:
 	rm -f $(OBJS) $(NAME)
 re: fclean all
+
+.PHONY: all clean fclean re
