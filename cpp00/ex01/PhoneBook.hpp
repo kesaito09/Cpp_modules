@@ -2,19 +2,16 @@
 #define PHONE_BOOK_HPP
 #include "Contact.hpp"
 
-class PhoneBook
-{
-private:
-	Contact			contacts[8];
-	unsigned int	count;
+class PhoneBook {
+ private:
+  Contact _contacts[8];
+  unsigned int _count;
 
-public:
-
-	PhoneBook();
-	void	add();
-	void	search();
-	void	display_list();
-	void	display_header(void);
+ public:
+  PhoneBook();
+  void add();
+  void search() const;
+  void display_list() const;
 };
 
 #endif

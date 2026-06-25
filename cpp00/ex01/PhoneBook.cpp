@@ -1,61 +1,49 @@
 #include "PhoneBook.hpp"
+
 #include <iostream>
 #include <sstream>
-#include <iomanip>
 #include <string>
 
-PhoneBook::PhoneBook()
-{
-	PhoneBook::count = 0;
+bool input(Contact::s_contact* data);
+void logger(std::string msg);
+
+PhoneBook::PhoneBook() { _count = 0; }
+
+void PhoneBook::add(void) {
+  Contact new_contact;
+  Contact::s_contact data;
+  int slot;
+
+  slot = _count;
+  if (!input(&data)) return;
+  if (!new_contact.validate_format(data))
+    return logger("Contact not saved: all fields are required.");
+  new_contact.set(data);
+  _contacts[slot % 8] = new_contact;
+  _count++;
 }
 
-void PhoneBook::add(void)
-{
-	Contact	new_contact;
-	int		slot;
+void PhoneBook::display_list(void) const {
+  int display_count = 0;
 
-	slot = PhoneBook::count;
-	if (!new_contact.set())
-		return ;
-	PhoneBook::contacts[slot % 8] = new_contact;
-	PhoneBook::count++;
+  Contact::display_header();
+  if (_count >= 8)
+    display_count = 8;
+  else
+    display_count = _count;
+  for (int i = 0; i < display_count; ++i) _contacts[i].display_row(i);
 }
 
-void	PhoneBook::display_header(void)
-{
-	std::cout << std::setw(10) << "index" << "|";
-	std::cout << std::setw(10) << "first name" <<  "|";
-	std::cout << std::setw(10) << "last name" <<  "|";
-	std::cout << std::setw(10) << "nickname";
-	std::cout << std::endl;
-}
+void PhoneBook::search(void) const {
+  unsigned int index;
+  std::string line;
+  char check;
 
-void PhoneBook::display_list(void)
-{
-	int	display_count = 0;
-
-	PhoneBook::display_header();
-	count >= 8 ? display_count = 8: display_count = count % 8;
-	for (int i = 0; i < display_count; i++)
-		PhoneBook::contacts[i].display_row(i);
-}
-
-void PhoneBook::search(void)
-{
-	unsigned int		index;
-	std::string			line;
-	char				check;
-
-	PhoneBook::display_list();
-	std::cout << "Enter index: ";
-	std::getline(std::cin, line);
-	std::stringstream ss(line);
-	if (!(ss >> index) || ss >> check)
-		return ;
-	if (index >= 8 || index >= count)
-	{
-		std::cout << "Invalid index" << std::endl;
-		return ;
-	}
-	PhoneBook::contacts[index].display_details();
+  display_list();
+  std::cout << "Enter index: ";
+  if (!(std::getline(std::cin, line))) return;
+  std::stringstream ss(line);
+  if (!(ss >> index) || ss >> check) return logger("Invalid index");
+  if (index >= 8 || index >= _count) return logger("Invalid index");
+	_contacts[index].display_details();
 }
