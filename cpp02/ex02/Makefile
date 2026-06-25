@@ -1,7 +1,6 @@
 NAME		= fixed
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 SRCS		= Fixed.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 HEADERS		= Fixed.hpp

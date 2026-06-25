@@ -1,7 +1,6 @@
 NAME		= brain
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 SRCS		= Animal.cpp Brain.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 HEADERS		= Animal.hpp Brain.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp

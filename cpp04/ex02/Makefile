@@ -1,7 +1,6 @@
 NAME		= abstract
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 SRCS		= AAnimal.cpp Brain.cpp Cat.cpp Dog.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 HEADERS		= AAnimal.hpp Brain.hpp Cat.hpp Dog.hpp

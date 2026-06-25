@@ -1,7 +1,6 @@
 NAME		= serialize
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 SRCS		= Serializer.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 HEADERS		= Data.hpp Serializer.hpp

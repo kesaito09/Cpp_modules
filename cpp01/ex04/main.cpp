@@ -1,77 +1,50 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 
-int	main(int ac, char **av)
-{
-	if (ac != 4)
-		return (1);
-	std::string sub = av[2];
-	std::string rep = av[3];
-	std::size_t sub_len = sub.length();
-	std::size_t rep_len = rep.length();
-	if (sub.empty())
-	{
-		std::cout << "sed: first RE may not be empty" << std::endl;
-		return (1);
-	}
-	std::ifstream ifs(av[1]);
-	if (!ifs.is_open())
-	{
-		std::cout << "ファイルを開けませんでした" << std::endl;
-		return (1);
-	}
-	std::string file_name = av[1];
-	std::ofstream ofs(file_name + ".replace");
-	if (!ofs.is_open())
-	{
-		std::cout << "ファイルを開けませんでした" << std::endl;
-		return (1);
-	}
-	std::string line;
-	while (std::getline(ifs, line))
-	{
-		std::size_t pos = line.find(sub);
-		while (pos != std::string::npos)
-		{
-			line.erase(pos, sub_len);
-			line.insert(pos, rep);
-			pos = line.find(sub, pos + rep_len);
-		}
-		ofs << line << std::endl;
-	}
-	return 0;
+std::string sed_content(std::ifstream& ifs, const std::string& sub,
+                        const std::string& rep) {
+  std::size_t sub_len = sub.length();
+  std::size_t rep_len = rep.length();
+  std::stringstream ss;
+  ss << ifs.rdbuf();
+  std::string content = ss.str();
+  std::size_t pos = content.find(sub);
+  while (pos != std::string::npos) {
+    content.erase(pos, sub_len);
+    content.insert(pos, rep);
+    pos = content.find(sub, pos + rep_len);
+  }
+  return content;
 }
 
-/*
-	av[1] == av[2]
-	av[2] = av[1] + *
-	av[1] = ""
-*/
+// streamはコピー禁止だから、参照を渡す。
+bool openfile(const std::string& name, std::ifstream& ifs, std::ofstream& ofs) {
+  ifs.open(name.c_str());
+  if (!ifs.is_open()) {
+    std::cout << "ファイルを開けませんでした" << std::endl;
+    return false;
+  }
+  ofs.open((name + ".replace").c_str());
+  if (!ofs.is_open()) {
+    std::cout << "ファイルを開けませんでした" << std::endl;
+    return false;
+  }
+  return true;
+}
 
-// using namespace std;
-// int main(void)
-// {
-// 	string s = "myname is myname and yourname is myname";
-// 	string sub = "myname";
-// 	string rep = "fdddddddddddddddd";
-
-// 	// cout << s.find("myname") << endl;
-// 	// int i = s.find("myname");
-// 	// s.erase(i, sub.length());
-// 	// cout << s.insert(i, rep) << endl;
-// 	// int j = s.find("myname");
-// 	// s.erase(j ,sub.length());
-// 	// cout << s.insert(j, rep) << endl;
-
-// 	std::size_t pos = s.find(sub);
-// 	std::size_t sub_len = sub.length();
-// 	std::size_t	rep_len = rep.length();
-// 	while (pos != std::string::npos)
-// 	{
-// 		s.erase(pos, sub_len);
-// 		s.insert(pos, rep);
-// 		pos = s.find(sub, pos + rep_len);
-// 	}
-// 	cout << s << endl;
-// }
+int main(int ac, char** av) {
+  if (ac != 4) return (1);
+  std::string sub = av[2];
+  std::string rep = av[3];
+  if (sub.empty()) {
+    std::cout << "sed: first RE may not be empty" << std::endl;
+    return 1;
+  }
+  std::ifstream ifs;
+  std::ofstream ofs;
+  if (!openfile(av[1], ifs, ofs)) return 1;
+  ofs << sed_content(ifs, sub, rep);
+  return 0;
+}

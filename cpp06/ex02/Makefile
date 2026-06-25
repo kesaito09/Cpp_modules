@@ -1,7 +1,6 @@
 NAME		= identify
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 SRCS		= Base.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 HEADERS		= A.hpp B.hpp Base.hpp C.hpp

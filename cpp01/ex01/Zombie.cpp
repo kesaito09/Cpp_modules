@@ -1,19 +1,12 @@
 #include "Zombie.hpp"
-#include <string>
+
 #include <iostream>
+#include <string>
 
+Zombie::~Zombie() { std::cout << name_ << ": deleted" << std::endl; }
 
-Zombie::~Zombie()
-{
-	std::cout << name << ": deleted" << std::endl;
-}
+void Zombie::set(const std::string& name) { name_ = name; }
 
-void	Zombie::set(std::string name)
-{
-	this->name = name;
-}
-
-void	Zombie::announce(void)
-{
-	std::cout << name << ": BraiiiiiiinnnzzzZ.." << std::endl;
+void Zombie::announce(void) {
+  std::cout << name_ << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
