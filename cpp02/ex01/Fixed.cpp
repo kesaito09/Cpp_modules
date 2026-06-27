@@ -9,14 +9,17 @@ Fixed::Fixed() : value_(0) {
   std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& other) {
+Fixed::Fixed(const Fixed& other) : value_(other.value_) {
   std::cout << "Copy constructor called" << std::endl;
-  value_ = other.value_;
 }
 
-Fixed::Fixed(int value) { value_ = value << fbits_; }
+Fixed::Fixed(int value) : value_(value << fbits_) {
+  std::cout << "Int constructor called" << std::endl;
+}
 
-Fixed::Fixed(float value) { value_ = roundf(value * (1 << fbits_)); }
+Fixed::Fixed(float value) : value_(roundf(value * (1 << fbits_))) {
+  std::cout << "Float constructor called" << std::endl;
+}
 
 Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
 
