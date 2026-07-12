@@ -5,7 +5,7 @@
 Zombie* zombieHorde(int N, std::string name);
 
 int main(void) {
-  int N = 2;
+  int N = 5;
 
   Zombie* zombies = zombieHorde(N, "zombiiiiiiiiiii");
   for (int i = 0; i < N; i++) {
