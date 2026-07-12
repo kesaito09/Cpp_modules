@@ -31,36 +31,15 @@ void Harl::error(void) {
 }
 
 void Harl::complain(std::string level) {
-  static const Harl_func harl_arr[4] = {
-      &Harl::debug,
-      &Harl::info,
-      &Harl::warning,
-      &Harl::error,
-  };
-  static const std::string levels[4] = {
-      "DEBUG",
-      "INFO",
-      "WARNING",
-      "ERROR",
+  static const LevelEntry table[] = {
+      {"DEBUG", &Harl::debug},
+      {"INFO", &Harl::info},
+      {"WARNING", &Harl::warning},
+      {"ERROR", &Harl::error},
   };
   for (int i = 0; i < 4; ++i) {
-    if (levels[i] == level) return (this->*harl_arr[i])();
+    if (table[i].name == level) return (this->*table[i].func)();
   }
   std::cout << "INVALID" << std::endl;
   return;
 }
-
-// #include <iostream>
-// using namespace std;
-
-// void hello(void)
-// {
-// 	cout << "hello" << 	endl;
-// }
-
-// int main(void)
-// {
-// 	void	(*funcp)(void) = &hello;
-
-// 	funcp();
-// }
