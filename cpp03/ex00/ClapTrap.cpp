@@ -1,21 +1,29 @@
 #include "ClapTrap.hpp"
 
+#include <climits>
 #include <iostream>
 #include <string>
 
+ClapTrap::ClapTrap()
+    : name_("unknown"), hitPoints_(10), energyPoints_(10), attackDamage_(0) {
+  std::cout << name_ << " ClapTrap default constructor called" << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name)
     : name_(name), hitPoints_(10), energyPoints_(10), attackDamage_(0) {
-  std::cout << name_ << "ClapTrap constructor called" << std::endl;
+  std::cout << name_ << " ClapTrap constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
     : name_(other.name_),
       hitPoints_(other.hitPoints_),
       energyPoints_(other.energyPoints_),
-      attackDamage_(other.attackDamage_) {};
+      attackDamage_(other.attackDamage_) {
+  std::cout << name_ << " ClapTrap copy constructor called" << std::endl;
+}
 
 ClapTrap::~ClapTrap() {
-  std::cout << name_ << "ClapTrap destructor called" << std::endl;
+  std::cout << name_ << " ClapTrap destructor called" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
@@ -25,6 +33,8 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
     energyPoints_ = other.energyPoints_;
     attackDamage_ = other.attackDamage_;
   }
+  std::cout << name_ << " ClapTrap copy assignment operator called"
+            << std::endl;
   return *this;
 }
 
@@ -37,6 +47,7 @@ void ClapTrap::attack(const std::string& target) {
     std::cout << "ClapTrap " << name_
               << " can't attack: no hit points or energy left!" << std::endl;
 }
+
 void ClapTrap::takeDamage(unsigned int amount) {
   std::cout << "ClapTrap " << name_ << " takes " << amount << " damage!"
             << std::endl;
@@ -44,11 +55,20 @@ void ClapTrap::takeDamage(unsigned int amount) {
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
+  unsigned int repair;
   if (energyPoints_ > 0 && hitPoints_ > 0) {
-    std::cout << "ClapTrap " << name_ << " is repaired " << amount << " HP"
-              << std::endl;
-    hitPoints_ += amount;
+    long valid = static_cast<long>(hitPoints_) + amount;
+
+    if (valid > UINT_MAX) {
+      repair = UINT_MAX - hitPoints_;
+      hitPoints_ = UINT_MAX;
+    } else {
+      hitPoints_ += amount;
+      repair = amount;
+    }
     --energyPoints_;
+    std::cout << "ClapTrap " << name_ << " is repaired " << repair << " HP"
+              << std::endl;
   } else
     std::cout << "ClapTrap " << name_
               << " can't be repaired: no hit points or energy left!"

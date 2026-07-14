@@ -3,21 +3,28 @@
 #include <iostream>
 #include <string>
 
-
-ScavTrap::ScavTrap() : ClapTrap("None", 100, 50, 20) {}
+ScavTrap::ScavTrap() : ClapTrap("None", 100, 50, 20) {
+  std::cout << getName() << " ScavTrap constructor called" << std::endl;
+}
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20) {
-  std::cout << "ScavTrap constructor called" << std::endl;
+  std::cout << getName() << " ScavTrap constructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other)
-    : ClapTrap(static_cast<const ClapTrap&>(other)) {}
+    : ClapTrap(static_cast<const ClapTrap&>(other)) {
+  std::cout << getName() << " ScavTrap copy constructor called" << std::endl;
+}
 
-ScavTrap::~ScavTrap() { std::cout << "ScavTrap destructor called" << std::endl; }
+ScavTrap::~ScavTrap() {
+  std::cout << getName() << " ScavTrap destructor called" << std::endl;
+}
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
   if (this != &other) {
     this->ClapTrap::operator=(static_cast<const ClapTrap&>(other));
   }
+  std::cout << getName() << " ScavTrap copy assignment operator called"
+            << std::endl;
   return *this;
 }
 
@@ -26,7 +33,7 @@ void ScavTrap::attack(const std::string& target) {
   unsigned int energyPoints = getEnergyPoints();
   unsigned int hitPoints = getHitpoints();
   if (energyPoints > 0 && hitPoints > 0) {
-    setEnergyPoints(--energyPoints);
+    setEnergyPoints(energyPoints - 1);
     std::cout << "ScavTrap " << name << " attacks " << target << ", causing "
               << getAttackDamage() << " points of damage!" << std::endl;
   } else

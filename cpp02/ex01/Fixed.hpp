@@ -10,8 +10,8 @@ class Fixed {
  public:
   Fixed();
   Fixed(const Fixed&);
-  Fixed(int);
-  Fixed(float);
+  Fixed(const int);
+  Fixed(const float);
   ~Fixed();
   Fixed& operator=(const Fixed&);
   int getRawBits(void) const;

@@ -16,6 +16,7 @@ class Point {
   static Fixed cross(const Point&, const Point&);
   Point& operator=(const Point&);
   Point operator-(const Point&) const;
+  Fixed operator*(const Point&) const;
 };
 
 #endif

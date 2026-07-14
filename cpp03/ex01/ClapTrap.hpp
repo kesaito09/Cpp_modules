@@ -10,7 +10,7 @@ class ClapTrap {
   unsigned int attackDamage_;
 
  protected:
-  ClapTrap(std::string, unsigned int, unsigned int , unsigned int);
+  ClapTrap(std::string, unsigned int, unsigned int, unsigned int);
   std::string getName(void) const;
   unsigned int getHitpoints(void) const;
   unsigned int getEnergyPoints(void) const;
@@ -21,6 +21,7 @@ class ClapTrap {
   void setAttackDamage(unsigned int);
 
  public:
+  ClapTrap();
   ClapTrap(std::string);
   ClapTrap(const ClapTrap&);
   virtual ~ClapTrap();

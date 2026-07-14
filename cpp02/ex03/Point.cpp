@@ -1,4 +1,5 @@
 #include "Point.hpp"
+#include "Fixed.hpp"
 
 Point::Point() : x_(0), y_(0) {}
 
@@ -18,6 +19,7 @@ Point Point::operator-(const Point& other) const {
   return Point(this->x_ - other.x_, this->y_ - other.y_);
 }
 
-Fixed Point::cross(const Point& u, const Point& v) {
-  return ((u.x_ * v.y_) - (u.y_ * v.x_));
+Fixed Point::operator*(const Point& other) const {
+  return ((this->x_ * other.y_) - (this->y_ * other.x_));
+
 }
