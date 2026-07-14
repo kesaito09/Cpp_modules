@@ -21,6 +21,7 @@ class ClapTrap {
   void setAttackDamage(unsigned int);
 
  public:
+  ClapTrap();
   ClapTrap(std::string);
   ClapTrap(const ClapTrap&);
   virtual ~ClapTrap();

@@ -58,7 +58,6 @@ void ClapTrap::beRepaired(unsigned int amount) {
   unsigned int repair;
   if (energyPoints_ > 0 && hitPoints_ > 0) {
     long valid = static_cast<long>(hitPoints_) + amount;
-
     if (valid > UINT_MAX) {
       repair = UINT_MAX - hitPoints_;
       hitPoints_ = UINT_MAX;
