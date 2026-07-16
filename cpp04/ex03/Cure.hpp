@@ -8,7 +8,7 @@ class Cure : public AMateria {
  public:
   Cure(/* args */);
   ~Cure();
-  AMateria* clone() const;
+  AMateria* clone(void) const;
   void use(ICharacter& target);
 };
 
