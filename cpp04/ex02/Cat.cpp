@@ -31,3 +31,7 @@ Cat::~Cat() {
 }
 
 void Cat::makeSound(void) const { std::cout << "meow meow" << std::endl; }
+
+std::string Cat::getIdea(size_t idx) const { return brain_->getter(idx); }
+
+void Cat::setIdea(size_t idx, std::string idea) { brain_->setter(idx, idea); }

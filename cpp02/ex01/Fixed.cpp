@@ -10,7 +10,7 @@ Fixed::Fixed() : value_(0) {
 }
 
 Fixed::Fixed(const Fixed& other) : value_(other.value_) {
-  std::cout << "copy assignment operator" << std::endl;
+  std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int value) : value_(value << fbits_) {

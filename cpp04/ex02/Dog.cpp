@@ -30,4 +30,8 @@ Dog::~Dog() {
   std::cout << "Dog destructor called" << std::endl;
 }
 
-void Dog::makeSound(void) const { std::cout << "wow wow" << std::endl; }
+void Dog::makeSound(void) const { std::cout << "woof woof" << std::endl; }
+
+std::string Dog::getIdea(size_t idx) const { return brain_->getter(idx); }
+
+void Dog::setIdea(size_t idx, std::string idea) { brain_->setter(idx, idea); }

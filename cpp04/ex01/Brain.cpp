@@ -23,5 +23,9 @@ Brain& Brain::operator=(const Brain& other) {
 }
 
 Brain::~Brain() {
-  std::cout << "Brain Default constructor called" << std::endl;
+  std::cout << "Brain destructor called" << std::endl;
 }
+
+std::string Brain::getter(size_t idx) const { return ideas_[idx]; }
+
+void Brain::setter(size_t idx, std::string idea) { ideas_[idx] = idea; }

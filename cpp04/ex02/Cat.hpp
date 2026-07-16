@@ -14,6 +14,8 @@ class Cat : public AAnimal {
   Cat& operator=(const Cat&);
   virtual ~Cat();
   void makeSound() const;
+  std::string getIdea(size_t idx) const;
+  void setIdea(size_t idx, std::string);
 };
 
 #endif

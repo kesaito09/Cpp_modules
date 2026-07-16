@@ -12,6 +12,8 @@ class Brain {
   Brain(const Brain&);
   Brain& operator=(const Brain&);
   ~Brain();
+  std::string getter(size_t idx) const;
+  void setter(size_t idx, std::string);
 };
 
 #endif

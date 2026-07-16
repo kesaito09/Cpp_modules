@@ -5,13 +5,13 @@
 #include "Dog.hpp"
 
 int main() {
-  const AAnimal* j = new Dog();
-  const AAnimal* i = new Cat();
-  std::cout << j->getType() << " " << std::endl;
-  std::cout << i->getType() << " " << std::endl;
-  i->makeSound();
-  j->makeSound();
-  delete j;
-  delete i;
+  std::cout << "----- Test : AAnimal*  -----\n"
+            << std::endl;
+  AAnimal* dog = new Dog();
+  AAnimal* cat = new Cat();
+
+  dog->makeSound();
+  cat->makeSound();
+  std::cout << "\n----- done -----" << std::endl;
   return 0;
 }
