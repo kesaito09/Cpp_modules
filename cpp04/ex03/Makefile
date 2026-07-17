@@ -1,9 +1,9 @@
 NAME		= materia
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
-SRCS		= AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp main.cpp
+SRCS		= AMateria.cpp Character.cpp Cure.cpp Floor.cpp Ice.cpp MateriaSource.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
-HEADERS		= AMateria.hpp Character.hpp Cure.hpp ICharacter.hpp IMateriaSource.hpp Ice.hpp MateriaSource.hpp
+HEADERS		= AMateria.hpp Character.hpp Cure.hpp Floor.hpp ICharacter.hpp IMateriaSource.hpp Ice.hpp MateriaSource.hpp
 all: $(NAME)
 
 $(NAME): $(OBJS)

@@ -3,12 +3,12 @@
 #include "AMateria.hpp"
 
 class Cure : public AMateria {
- private:
-  /* data */
  public:
-  Cure(/* args */);
-  ~Cure();
-  AMateria* clone(void) const;
+  Cure();
+  Cure(Cure const& other);
+  virtual ~Cure();
+  Cure& operator=(Cure const& other);
+  AMateria* clone() const;
   void use(ICharacter& target);
 };
 

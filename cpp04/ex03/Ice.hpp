@@ -3,12 +3,12 @@
 #include "AMateria.hpp"
 
 class Ice : public AMateria {
- private:
-  /* data */
  public:
-  Ice(/* args */);
-  ~Ice();
-  AMateria* clone(void) const;
+  Ice();
+  Ice(Ice const& other);
+  virtual ~Ice();
+  Ice& operator=(Ice const& other);
+  AMateria* clone() const;
   void use(ICharacter& target);
 };
 
